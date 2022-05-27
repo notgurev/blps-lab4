@@ -4,4 +4,5 @@ object ProcessVariables {
     val PRODUCT_IDS = "productIDs"
     val PROMOCODE_NAME = "promocodeName"
     val ORDER_ID = "orderID"
+    val CATALOGUE = "catalogue"
 }

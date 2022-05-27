@@ -1,0 +1,41 @@
+{
+  "components": [
+    {
+      "label": "ID товаров (через запятую)",
+      "type": "textfield",
+      "id": "Field_08qj404",
+      "key": "productIDs",
+      "disabled": false,
+      "validate": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "label": "Промокод",
+      "type": "textfield",
+      "id": "Field_1gpduiq",
+      "key": "promocodeName",
+      "description": "Оставьте поле пустым, чтобы не использовать промокод",
+      "validate": {
+        "required": false
+      }
+    },
+    {
+      "action": "submit",
+      "label": "Заказ",
+      "type": "button",
+      "id": "Field_1xp7iuh",
+      "key": "field_155xn6d"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1x3rpeq",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
