@@ -1,15 +1,15 @@
 package foxgurev.blps.lab4.order
 
+import foxgurev.blps.lab4.ProcessExceptions
 import foxgurev.blps.lab4.product.ProductService
 import foxgurev.blps.lab4.promocode.PromocodeService
-import org.camunda.bpm.model.bpmn.BpmnModelException
+import org.camunda.bpm.engine.delegate.BpmnError
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
-@Transactional
+//@Transactional
 class OrderService @Autowired constructor(
     val orderRepository: OrderRepository,
     val promocodeService: PromocodeService,
@@ -24,7 +24,8 @@ class OrderService @Autowired constructor(
 
     fun createOrder(productIDs: List<Long>, promocodeName: String): Long {
         // todo optional promocode
-        val promocode = promocodeService.getPromocode(promocodeName) ?: throw BpmnModelException("Промокод не найден")
+        val promocode = promocodeService.getPromocode(promocodeName)
+            ?: throw BpmnError(ProcessExceptions.PROMOCODE_NOT_FOUND, "Промокод не найден")
         val products = productService.findAllById(productIDs)
 
         products.forEach {
