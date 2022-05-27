@@ -15,3 +15,16 @@ spring:
       ddl-auto: create
     generate-ddl: true
     database: postgresql
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        default_schema: leonardo
+
+camunda:
+  bpm:
+    admin-user:
+      email: sigma@gmail.com
+      password: grindset
+      id: sigma
+      first-name: Ned
+      last-name: Flanders
