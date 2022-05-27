@@ -34,5 +34,6 @@ class Order(
 //    private val city: String,
 
     @Column
+    @Enumerated(EnumType.STRING)
     var status: OrderStatus,
 )

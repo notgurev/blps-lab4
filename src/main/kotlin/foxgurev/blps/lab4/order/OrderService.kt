@@ -3,6 +3,7 @@ package foxgurev.blps.lab4.order
 import foxgurev.blps.lab4.product.ProductService
 import foxgurev.blps.lab4.promocode.PromocodeService
 import org.camunda.bpm.model.bpmn.BpmnModelException
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -14,14 +15,17 @@ class OrderService @Autowired constructor(
     val promocodeService: PromocodeService,
     val productService: ProductService
 ) {
+    private val log = LoggerFactory.getLogger(javaClass)
+
     //    private final ProductRepository productRepository;
     //    private final DeliveryService deliveryService;
     //    private final ProductService productService;
     //    private final KafkaTemplate<String, ProductSupply> productSupplyQueue;
 
-    fun createOrder(ocr: OrderCreationRequest): Long {
-        val promocode = promocodeService.getPromocode(ocr.promocode) ?: throw BpmnModelException("Промокод не найден")
-        val products = productService.findAllById(ocr.products)
+    fun createOrder(productIDs: List<Long>, promocodeName: String): Long {
+        // todo optional promocode
+        val promocode = promocodeService.getPromocode(promocodeName) ?: throw BpmnModelException("Промокод не найден")
+        val products = productService.findAllById(productIDs)
 
         products.forEach {
             it.changeAmountInStock(-1)
@@ -35,6 +39,9 @@ class OrderService @Autowired constructor(
 
         val price = products.map { it.price }.sum() * (100 - promocode.discount) / 100
         val saved = orderRepository.save(Order(items = products, totalPrice = price, status = OrderStatus.CREATED))
+
+        log.info("Created an order with id = ${saved.id} and products ${products.map { it.name }}")
+
         return saved.id
     }
 //

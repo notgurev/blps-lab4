@@ -2,18 +2,20 @@ package foxgurev.blps.lab4
 
 import foxgurev.blps.lab4.product.Product
 import foxgurev.blps.lab4.product.ProductRepository
+import foxgurev.blps.lab4.promocode.Promocode
+import foxgurev.blps.lab4.promocode.PromocodeRepository
+import foxgurev.blps.lab4.promocode.PromocodeStatus
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import java.util.*
 
 @Component
-class Startup @Autowired constructor(
+class Init @Autowired constructor(
     val productRepository: ProductRepository,
-//    promocodeRepository: PromocodeRepository,
+    val promocodeRepository: PromocodeRepository,
 //    userRepository: UserRepository
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
@@ -26,15 +28,20 @@ class Startup @Autowired constructor(
             return
         }
         log.info("Adding initial entities...")
-        productRepository.saveAll(Arrays.asList(
-            Product(name = "Набор для шитья", price = 100, inStock = 1000),
-            Product(name = "Пластилин", price = 250, inStock = 2000),
-            Product(name = "Полимерная глина", price = 150, inStock = 500)
-        ))
-//        promocodeRepository.saveAll(Arrays.asList(
-//            Promocode("GORBUNOV", 50, PromocodeStatus.ACTIVE),
-//            Promocode("USKOV", 50, PromocodeStatus.INACTIVE)
-//        ))
+        productRepository.saveAll(
+            listOf(
+                Product(name = "Набор для шитья", price = 100, inStock = 1000),
+                Product(name = "Пластилин", price = 250, inStock = 2000),
+                Product(name = "Полимерная глина", price = 150, inStock = 500)
+            )
+        )
+        promocodeRepository.saveAll(
+            listOf(
+                Promocode(code = "TSOPA", discount = 30, status = PromocodeStatus.ACTIVE),
+                Promocode(code = "GORBUNOV", discount = 50, status = PromocodeStatus.ACTIVE),
+                Promocode(code = "USKOV", discount = 70, status = PromocodeStatus.INACTIVE)
+            )
+        )
 //        userRepository.save(User("user@sd.com", "username",
 //            "$2b$12\$CekwqWUxTHJKKCa8qEAOo.8pyOhGMMjdKDoBceMqAAp4/2TEAdr2.",
 //            "89023457654", Role.ROLE_USER))

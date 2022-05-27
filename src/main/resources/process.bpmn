@@ -9,6 +9,7 @@
             <camunda:properties />
             <camunda:validation />
           </camunda:formField>
+          <camunda:formField id="promocodeName" label="Промокод" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_156k3vj</bpmn:outgoing>
@@ -21,7 +22,11 @@
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_090b4zn" sourceRef="Activity_1i0zigo" targetRef="Activity_1jtllu7" />
     <bpmn:userTask id="Activity_1jtllu7" name="Получить информацию о заказе">
-      <bpmn:extensionElements />
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="orderID" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_090b4zn</bpmn:incoming>
       <bpmn:outgoing>Flow_1ti1bsy</bpmn:outgoing>
     </bpmn:userTask>
