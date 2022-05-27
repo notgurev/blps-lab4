@@ -15,8 +15,8 @@ class CreateOrderDelegate @Autowired constructor(
 ) : JavaDelegate {
     override fun execute(de: DelegateExecution) {
         val ids = splitByComma(de.getVariable(ProcessVariables.PRODUCT_IDS) as String).map { it.toLong() }
-        val promocode = de.getVariable(ProcessVariables.PROMOCODE_NAME) as String
-        val orderId = orderService.createOrder(ids, promocode)
+        val promocode = (de.getVariable(ProcessVariables.PROMOCODE_NAME) as String).trim()
+        val orderId = orderService.createOrder(ids, if (promocode != "") promocode else null)
         de.setVariable(ProcessVariables.ORDER_ID, orderId)
     }
 }

@@ -5,11 +5,11 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="productIDs" label="Продукты" type="string">
+          <camunda:formField id="productIDs" label="Продукты (id через запятую)" type="string">
             <camunda:properties />
             <camunda:validation />
           </camunda:formField>
-          <camunda:formField id="promocodeName" label="Промокод" type="string" />
+          <camunda:formField id="promocodeName" label="Промокод (пустая строка, если без промокода)" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_156k3vj</bpmn:outgoing>

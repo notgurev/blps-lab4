@@ -22,10 +22,13 @@ class OrderService @Autowired constructor(
     //    private final ProductService productService;
     //    private final KafkaTemplate<String, ProductSupply> productSupplyQueue;
 
-    fun createOrder(productIDs: List<Long>, promocodeName: String): Long {
-        // todo optional promocode
-        val promocode = promocodeService.getPromocode(promocodeName)
-            ?: throw BpmnError(ProcessExceptions.PROMOCODE_NOT_FOUND, "Промокод не найден")
+    fun createOrder(productIDs: List<Long>, promocodeName: String?): Long {
+        val promocode = promocodeName?.let {
+            promocodeService.getPromocode(promocodeName) ?: throw BpmnError(
+                ProcessExceptions.PROMOCODE_NOT_FOUND,
+                "Промокод не найден"
+            )
+        }
         val products = productService.findAllById(productIDs)
 
         products.forEach {
@@ -38,7 +41,7 @@ class OrderService @Autowired constructor(
 //            }
         }
 
-        val price = products.map { it.price }.sum() * (100 - promocode.discount) / 100
+        val price = products.sumOf { it.price } * (100 - (promocode?.discount ?: 0)) / 100
         val saved = orderRepository.save(Order(items = products, totalPrice = price, status = OrderStatus.CREATED))
 
         log.info("Created an order with id = ${saved.id} and products ${products.map { it.name }}")
