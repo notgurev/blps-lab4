@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class BlpsLab4Application
+class BlpsCamundaApplication
 
 fun main(args: Array<String>) {
-    runApplication<BlpsLab4Application>(*args)
+    runApplication<BlpsCamundaApplication>(*args)
 }
