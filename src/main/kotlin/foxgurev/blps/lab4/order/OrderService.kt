@@ -3,6 +3,7 @@ package foxgurev.blps.lab4.order
 import foxgurev.blps.lab4.ProcessExceptions
 import foxgurev.blps.lab4.product.ProductService
 import foxgurev.blps.lab4.promocode.PromocodeService
+import foxgurev.blps.lab4.promocode.PromocodeStatus
 import org.camunda.bpm.engine.delegate.BpmnError
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -29,6 +30,13 @@ class OrderService @Autowired constructor(
                 "Промокод не найден"
             )
         }
+
+        promocode?.let {
+            if (promocode.status == PromocodeStatus.INACTIVE) {
+                throw BpmnError(ProcessExceptions.PROMOCODE_INACTIVE, "Промокод не активен")
+            }
+        }
+
         val products = productService.findAllById(productIDs)
 
         products.forEach {

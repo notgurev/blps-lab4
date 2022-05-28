@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional
 class Init @Autowired constructor(
     val productRepository: ProductRepository,
     val promocodeRepository: PromocodeRepository,
-//    userRepository: UserRepository
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
 
@@ -42,13 +41,6 @@ class Init @Autowired constructor(
                 Promocode(code = "USKOV", discount = 70, status = PromocodeStatus.INACTIVE)
             )
         )
-//        userRepository.save(User("user@sd.com", "username",
-//            "$2b$12\$CekwqWUxTHJKKCa8qEAOo.8pyOhGMMjdKDoBceMqAAp4/2TEAdr2.",
-//            "89023457654", Role.ROLE_USER))
-//        userRepository.save(User("admin@sd.com", "admin",
-//            "$2b$12\$CekwqWUxTHJKKCa8qEAOo.8pyOhGMMjdKDoBceMqAAp4/2TEAdr2.",
-//            "88005555555",
-//            Role.ROLE_ADMIN))
         log.info("Successfully added initial entities")
     }
 }
