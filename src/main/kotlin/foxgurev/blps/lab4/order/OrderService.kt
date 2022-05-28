@@ -90,10 +90,9 @@ class OrderService @Autowired constructor(
         log.info("Cancelled order $id")
     }
 
-    fun packOrderAndOrganizeDelivery(
+    fun organizeDelivery(
         orderId: Long, name: String, phoneNumber: String?, email: String?, address: String
     ) {
-        changeStatus(orderId, PACKED)
         val freeDate = deliveryService.selectDeliveryDate()
         val delivery = Delivery(
             orderId = orderId, date = freeDate, name = name,
