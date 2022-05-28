@@ -94,17 +94,22 @@
   <bpmn:message id="Message_3hhdr6q" name="Message_3hhdr6q" />
   <bpmn:message id="Message_2tp1ai1" name="Message_2tp1ai1" />
   <bpmn:message id="Message_2fteih9" name="SentToDelivery" />
-  <bpmn:process id="Process_05ioos7" isExecutable="false">
+  <bpmn:process id="Process_05ioos7" isExecutable="true">
     <bpmn:startEvent id="Event_1ogtbm7">
       <bpmn:outgoing>Flow_0j2uwyk</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_18vgrxz">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P10S</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:startEvent>
-    <bpmn:task id="Activity_142k9zy" name="Отправить запрос">
-      <bpmn:incoming>Flow_0j2uwyk</bpmn:incoming>
-    </bpmn:task>
     <bpmn:sequenceFlow id="Flow_0j2uwyk" sourceRef="Event_1ogtbm7" targetRef="Activity_142k9zy" />
+    <bpmn:sequenceFlow id="Flow_0fty4dr" sourceRef="Activity_142k9zy" targetRef="Event_03nz93e" />
+    <bpmn:endEvent id="Event_03nz93e">
+      <bpmn:incoming>Flow_0fty4dr</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_142k9zy" name="Resupply" camunda:delegateExpression="${resupplyDelegate}">
+      <bpmn:incoming>Flow_0j2uwyk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fty4dr</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:process id="Process_1308aws" isExecutable="false">
     <bpmn:startEvent id="Event_04fn8wj">
@@ -238,14 +243,20 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0j2uwyk_di" bpmnElement="Flow_0j2uwyk">
         <di:waypoint x="288" y="1700" />
-        <di:waypoint x="340" y="1700" />
+        <di:waypoint x="410" y="1700" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fty4dr_di" bpmnElement="Flow_0fty4dr">
+        <di:waypoint x="510" y="1700" />
+        <di:waypoint x="612" y="1700" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_00j79sy_di" bpmnElement="Event_1ogtbm7">
         <dc:Bounds x="252" y="1682" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_142k9zy_di" bpmnElement="Activity_142k9zy">
-        <dc:Bounds x="340" y="1660" width="100" height="80" />
-        <bpmndi:BPMNLabel />
+      <bpmndi:BPMNShape id="Event_03nz93e_di" bpmnElement="Event_03nz93e">
+        <dc:Bounds x="612" y="1682" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0w2bd6m_di" bpmnElement="Activity_142k9zy">
+        <dc:Bounds x="410" y="1660" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0tzn1ci_di" bpmnElement="Participant_0tzn1ci" isHorizontal="true">
         <dc:Bounds x="160" y="80" width="600" height="250" />

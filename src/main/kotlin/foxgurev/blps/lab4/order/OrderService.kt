@@ -38,15 +38,7 @@ class OrderService @Autowired constructor(
         val products = productService.findAllById(productIDs)
 
         log.info("Removing from stock: ${products.map { "[${it.id}] " + it.name }}")
-        products.forEach {
-            it.changeAmountInStock(-1)
-//            val inStock: Int = it.changeAmountInStock(-1)
-//            if (inStock <= p.getWatermark() && !p.getMarkedForResupply()) {
-//                p.setMarkedForResupply(true)
-//                OrderService.log.info("Marked product with id = {} for resupply", p.getId())
-//                productSupplyQueue.send("resupply", ProductSupply(p.getId(), 1))
-//            }
-        }
+        products.forEach { it.changeAmountInStock(-1) }
 
         val price = products.sumOf { it.price } * (100 - (promocode?.discount ?: 0)) / 100
         val saved = orderRepository.save(

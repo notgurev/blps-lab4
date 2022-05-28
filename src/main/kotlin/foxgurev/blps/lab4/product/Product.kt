@@ -17,14 +17,12 @@ class Product(
     @Column
     var inStock: Int = 0,
 
-//    @Column
-//    var watermark: Int? = null,
-//
-//    @Column
-//    var markedForResupply: Boolean? = null
-) {
-//    constructor(name: String, price: Int, inStock: Int) : this(0, name, price, inStock)
+    @Column
+    var watermark: Int = 1,
 
+    @Column
+    var markedForResupply: Boolean = false
+) {
     fun changeAmountInStock(delta: Int): Int {
         if (inStock == 0 && delta < 0) throw RuntimeException("No amount of product left in stock") // todo bpmn exception
         inStock += delta
