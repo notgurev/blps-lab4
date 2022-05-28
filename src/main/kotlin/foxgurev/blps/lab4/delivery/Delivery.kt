@@ -14,5 +14,17 @@ class Delivery(
     var orderId: Long,
 
     @Column
-    var date: LocalDateTime
+    var date: LocalDateTime,
+
+    @Column
+    var name: String,
+
+    @Column
+    var phoneNumber: String?,
+
+    @Column
+    var email: String?,
+
+    @Column
+    var address: String,
 )

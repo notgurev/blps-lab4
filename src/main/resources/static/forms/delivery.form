@@ -1,0 +1,57 @@
+{
+  "components": [
+    {
+      "label": "Номер заказа",
+      "type": "textfield",
+      "id": "Field_1j81798",
+      "key": "orderID",
+      "disabled": true,
+      "defaultValue": "${orderID}",
+      "validate": {
+        "required": false
+      }
+    },
+    {
+      "label": "Имя",
+      "type": "textfield",
+      "id": "Field_170daiw",
+      "key": "delivery.name"
+    },
+    {
+      "label": "Адрес",
+      "type": "textfield",
+      "id": "Field_1jp6es6",
+      "key": "delivery.address"
+    },
+    {
+      "label": "Email",
+      "type": "textfield",
+      "id": "Field_08n76fj",
+      "key": "delivery.email",
+      "description": "Для уведомлений о статусе доставки"
+    },
+    {
+      "label": "Номер телефона",
+      "type": "textfield",
+      "id": "Field_0kv24jn",
+      "key": "delivery.phoneNumber",
+      "description": "Для уведомлений о статусе доставки"
+    },
+    {
+      "action": "submit",
+      "label": "Заказ",
+      "type": "button",
+      "id": "Field_06z2z0w",
+      "key": "field_098ws8e"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0mwqc05",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

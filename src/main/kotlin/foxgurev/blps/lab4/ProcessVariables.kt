@@ -7,4 +7,9 @@ object ProcessVariables {
     val IS_OUT_OF_STOCK = "isOutOfStock"
 
     val ORDER_ID = "orderID"
+
+    val DELIVERY_NAME = "delivery.name"
+    val DELIVERY_EMAIL = "delivery.email"
+    val DELIVERY_PHONE_NUMBER = "delivery.phoneNumber"
+    val DELIVERY_ADDRESS = "delivery.address"
 }

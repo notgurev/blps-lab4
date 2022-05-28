@@ -1,6 +1,7 @@
 package foxgurev.blps.lab4.order
 
 import foxgurev.blps.lab4.product.Product
+import foxgurev.blps.lab4.promocode.Promocode
 import javax.persistence.*
 
 @Entity
@@ -12,26 +13,11 @@ class Order(
     @ManyToMany
     var items: List<Product>,
 
-//    @ManyToOne
-//    private val promocode: Promocode,
+    @ManyToOne
+    var promocode: Promocode? = null,
 
     @Column
     var totalPrice: Int,
-
-//    @Column
-//    private val name: String,
-//
-//    @Column
-//    private val surname: String,
-//
-//    @Column
-//    private val phoneNumber: String,
-//
-//    @Column
-//    private val email: String,
-//
-//    @Column
-//    private val city: String,
 
     @Column
     @Enumerated(EnumType.STRING)
