@@ -31,7 +31,8 @@ class Init @Autowired constructor(
             listOf(
                 Product(name = "Набор для шитья", price = 100, inStock = 1000),
                 Product(name = "Пластилин", price = 250, inStock = 2000),
-                Product(name = "Полимерная глина", price = 150, inStock = 500)
+                Product(name = "Полимерная глина", price = 150, inStock = 500),
+                Product(name = "Бумага для печати", price = 50, inStock = 0)
             )
         )
         promocodeRepository.saveAll(
