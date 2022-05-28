@@ -14,10 +14,10 @@ class MarkAsShippingDelegate @Autowired constructor(
 ) : JavaDelegate {
     override fun execute(de: DelegateExecution) {
         val orderId = de.getVariable(ProcessVariables.ORDER_ID) as Long
+        orderService.changeStatus(orderId, OrderStatus.SHIPPING)
         de.processEngineServices.runtimeService
             .createMessageCorrelation("SentToDelivery")
             .setVariable("orderID", orderId)
             .correlate()
-        orderService.changeStatus(orderId, OrderStatus.SHIPPING)
     }
 }
